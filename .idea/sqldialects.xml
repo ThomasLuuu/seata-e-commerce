@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/credit-api/build/resources/main/data.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/credit-api/build/resources/main/schema.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/credit-api/docker/seata-client-config/mysql.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/credit-api/src/main/resources/data.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/credit-api/src/main/resources/schema.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/infra/docker/seata/mysql.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/shipping-api/build/resources/main/schema.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/shipping-api/docker/seata-client-config/script.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/shipping-api/src/main/resources/schema.sql" dialect="GenericSQL" />
+  </component>
+</project>
