@@ -8,11 +8,12 @@ import org.apache.seata.core.context.RootContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
 
-@Component
+@Service
 public class CreditService {
 
     @Value("${credit.url}")

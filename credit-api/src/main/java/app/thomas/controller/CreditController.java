@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.annotation.Validated;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/credit/wallets")
 @Observed(name = "credit", contextualName = "controller")
 @Validated
+@AllArgsConstructor
 public class CreditController {
 
-    @Autowired
-    private CreditManager creditManager;
+    private final CreditManager creditManager;
 
     @Operation(
             operationId = "updateBalance",

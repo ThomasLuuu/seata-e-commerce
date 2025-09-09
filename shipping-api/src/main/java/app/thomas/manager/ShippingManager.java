@@ -4,6 +4,7 @@ import app.thomas.model.Shipping;
 import app.thomas.repository.ShippingRepository;
 import app.thomas.repository.entity.ShippingEntity;
 import io.micrometer.observation.annotation.Observed;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @Observed(contextualName = "manager")
+@AllArgsConstructor
 public class ShippingManager {
 
-    @Autowired
-    private ShippingRepository shippingRepository;
+    private final ShippingRepository shippingRepository;
 
     @Transactional
     public Shipping buyShipping(Long userID, BigDecimal cost) throws InterruptedException {

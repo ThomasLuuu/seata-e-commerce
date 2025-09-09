@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.annotation.Validated;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/shipping")
 @Observed(name = "shipping", contextualName = "controller")
 @Validated
+@AllArgsConstructor
 public class ShippingController {
 
-    @Autowired
-    private ShippingManager shippingManager;
+    private final ShippingManager shippingManager;
 
     @Operation(
             operationId = "buyShipping",

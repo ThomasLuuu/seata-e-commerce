@@ -6,6 +6,8 @@ import app.thomas.repository.CreditTransactionsRepository;
 import app.thomas.repository.CreditWalletsRepository;
 import app.thomas.repository.entity.CreditTransactionsEntity;
 import io.micrometer.observation.annotation.Observed;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +18,12 @@ import java.util.NoSuchElementException;
 
 @Service
 @Observed(contextualName = "manager")
+@AllArgsConstructor
 public class CreditManager {
 
-    @Autowired
-    private CreditTransactionsRepository creditTransactionsRepository;
+    private final CreditTransactionsRepository creditTransactionsRepository;
 
-    @Autowired
-    private CreditWalletsRepository creditWalletsRepository;
+    private final CreditWalletsRepository creditWalletsRepository;
 
     @Transactional
     public Wallet updateBalance(Long userID, BigDecimal amount, CreditTransactionType transactionType) {
