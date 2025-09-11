@@ -28,6 +28,15 @@ public class CreditTransactionsEntity {
     @Column(name = "TYPE")
     private CreditTransactionType type;
 
+    @Column(name = "STATUS")
+    private String status; // For TCC: PENDING, CONFIRMED, CANCELED
+
     @Column(name = "CREATED_AT")
     private Date createdAt;
+
+    @Column(name = "XID")
+    private String xid; // For TCC fence
+
+    @Column(name = "BRANCH_ID")
+    private Long branchId; // For TCC fence
 }

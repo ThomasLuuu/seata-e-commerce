@@ -4,34 +4,29 @@ import app.thomas.model.ShippingResult;
 import app.thomas.service.CreditService;
 import app.thomas.service.ShippingService;
 import io.micrometer.observation.annotation.Observed;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.seata.spring.annotation.GlobalTransactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-@Slf4j
 @Service
 @Observed(contextualName = "manager")
 @AllArgsConstructor
 public class ApplicationManager {
 
     private final CreditService creditService;
-
     private final ShippingService shippingService;
 
     @GlobalTransactional
-    public ShippingResult buyShipping(Long userID, BigDecimal cost) {
-        var wallet = creditService.updateBalance(userID, cost);
-        var shipping = shippingService.buyShipping(userID, cost);
-        wallet = creditService.getWallet(userID);
+    public ShippingResult buyShipping(Long userId, BigDecimal cost) {
+        var wallet = creditService.updateBalance(userId, cost);
+        var shipping = shippingService.buyShipping(userId, cost);
+        wallet = creditService.getWallet(userId);
         var result = new ShippingResult();
         result.setCost(cost);
-        result.setShippingID(shipping.getId());
+        result.setShippingId(shipping.getId());
         result.setCurrentBalance(wallet.getBalance());
         return result;
     }
-
 }

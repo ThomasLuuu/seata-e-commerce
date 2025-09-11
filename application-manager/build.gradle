@@ -29,7 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	// Seata
-	implementation 'org.apache.seata:seata-spring-boot-starter:2.3.0'
+	implementation 'org.apache.seata:seata-spring-boot-starter:2.5.0'
 	implementation('com.alibaba.cloud:spring-cloud-starter-alibaba-seata:2023.0.3.3') {
 		exclude group: 'org.apache.seata', module: 'seata-spring-boot-starter'
 	}

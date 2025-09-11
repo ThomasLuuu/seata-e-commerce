@@ -1,6 +1,5 @@
 seata:
   enabled: true
-  data-source-proxy-mode: AT
   enable-auto-data-source-proxy: true
   application-id:  ${spring.application.name}
   tx-service-group: default_tx_group
@@ -9,6 +8,11 @@ seata:
       default_tx_group: default
     grouplist:
       default: 127.0.0.1:8091
+  tcc:
+    fence:
+      enabled: true
+      table-name: tcc_fence_log
+      clean-period: 3600
 
 spring:
   threads:

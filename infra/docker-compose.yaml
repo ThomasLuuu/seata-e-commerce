@@ -19,17 +19,20 @@ services:
       retries: 5
 
   seata-server:
-    image: apache/seata-server:2.3.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: seata-server
     depends_on:
       mysql:
         condition: service_healthy
     environment:
-      - SEATA_CONFIG_NAME=application.yml
+      - SEATA_CONFIG_NAME=application-tcc.yml
     volumes:
-      - "./docker/seata/resources/application.yml:/seata-server/resources/application.yml"
+      - "./docker/seata/resources/application-tcc.yml:/seata-server/resources/application-tcc.yml"
       - "./docker/seata/mysql-connector-j-8.0.33.jar:/seata-server/libs/mysql-connector-j-8.0.33.jar"
     ports:
+      - "2379:2379"
       - "7091:7091"
       - "8091:8091"
 
@@ -75,3 +78,4 @@ services:
 
 volumes:
   mysql_data:
+  seata-etcd:

@@ -37,7 +37,7 @@ dependencies {
 	implementation 'com.zaxxer:HikariCP:6.3.0'
 
 	// Seata
-	implementation 'org.apache.seata:seata-spring-boot-starter:2.3.0'
+	implementation 'org.apache.seata:seata-spring-boot-starter:2.5.0'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
