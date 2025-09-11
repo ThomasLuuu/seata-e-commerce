@@ -6,6 +6,8 @@
 #### Infra components
 Go to *infra* folder:
 
+    docker compose build --no-cache seata-server
+
     docker compose up
 
 This will start:
