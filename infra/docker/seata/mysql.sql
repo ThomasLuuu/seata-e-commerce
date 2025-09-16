@@ -98,3 +98,14 @@ CREATE TABLE IF NOT EXISTS `vgroup_table`
   UNIQUE KEY `idx_vgroup_namespace_cluster` (`vGroup`,`namespace`,`cluster`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+-- The table is usually named tcc_fence_log, but you can configure it.
+CREATE TABLE `tcc_fence_log` (
+                                 `xid` varchar(128) NOT NULL COMMENT 'global transaction id',
+                                 `branch_id` bigint(20) NOT NULL COMMENT 'branch transaction id',
+                                 `action_name` varchar(256) NOT NULL COMMENT 'business action name',
+                                 `status` int(11) NOT NULL COMMENT 'status: 0(unknown), 1(tried), 2(committed), 3(rollbacked), 4(suspended), ...',
+                                 `gmt_create` datetime NOT NULL COMMENT 'create time',
+                                 `gmt_modified` datetime NOT NULL COMMENT 'modify time',
+                                 PRIMARY KEY (`xid`,`branch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='TCC fence log table';

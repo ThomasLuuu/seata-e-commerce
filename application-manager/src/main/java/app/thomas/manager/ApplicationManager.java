@@ -26,6 +26,7 @@ public class ApplicationManager {
         var result = new ShippingResult();
         result.setCost(cost);
         result.setShippingId(shipping.getId());
+
         result.setCurrentBalance(wallet.getBalance());
         return result;
     }
