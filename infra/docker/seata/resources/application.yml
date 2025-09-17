@@ -25,11 +25,20 @@ seata:
     secretKey: seata
     tokenValidityInMilliseconds: 1800000
 
+  registry:
+    type: zk
+    zk:
+      server-addr: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+      cluster: default
   config:
     type: file
-
-  registry:
-    type: file
+  server:
+    service-port: 8091
+  transport:
+    server: NIO
+    type: TCP
+    serialization: seata
+    compressor: none
 
   store:
     mode: db

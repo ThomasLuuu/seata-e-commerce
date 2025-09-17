@@ -13,7 +13,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./docker/seata/mysql.sql:/docker-entrypoint-initdb.d/seata.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,6 +24,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      zookeeper1:
+        condition: service_healthy
     environment:
       - SEATA_CONFIG_NAME=application.yml
     volumes:
@@ -32,6 +34,48 @@ services:
     ports:
       - "7091:7091"
       - "8091:8091"
+
+  zookeeper1:
+    image: zookeeper:3.8
+    container_name: zookeeper1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    healthcheck:
+      test: [ "CMD", "echo", "ruok", "|", "nc", "-z", "localhost", "2181" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  zookeeper2:
+    image: zookeeper:3.8
+    container_name: zookeeper2
+    ports:
+      - "2182:2181"
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    healthcheck:
+      test: [ "CMD", "echo", "ruok", "|", "nc", "-z", "localhost", "2181" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  zookeeper3:
+    image: zookeeper:3.8
+    container_name: zookeeper3
+    ports:
+      - "2183:2181"
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    healthcheck:
+      test: [ "CMD", "echo", "ruok", "|", "nc", "-z", "localhost", "2181" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   tempo:
     container_name: tempo
