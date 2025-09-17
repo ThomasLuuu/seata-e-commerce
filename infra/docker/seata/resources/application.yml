@@ -9,6 +9,8 @@ spring:
     url: jdbc:mysql://mysql:3306/seata
     username: seata_user
     password: seata_pass
+  main:
+    web-application-type: none
 
 logging:
   config: classpath:logback-spring.xml
@@ -25,21 +27,21 @@ seata:
     secretKey: seata
     tokenValidityInMilliseconds: 1800000
 
+  server:
+    service-port: 8091
+
   registry:
     type: zk
     zk:
-      server-addr: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
       cluster: default
-  config:
-    type: file
-  server:
-    service-port: 8091
-  transport:
-    server: NIO
-    type: TCP
-    serialization: seata
-    compressor: none
-
+      server-addr: zk:2181
+      session-timeout: 6000
+      connect-timeout: 2000
+      username: ""
+      password: ""
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
   store:
     mode: db
     db:

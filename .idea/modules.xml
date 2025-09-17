@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application-manager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application-manager.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bff.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bff.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/credit-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/credit-api.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/seata-e-commerce.iml" filepath="$PROJECT_DIR$/seata-e-commerce.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shipping-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shipping-api.main.iml" />
