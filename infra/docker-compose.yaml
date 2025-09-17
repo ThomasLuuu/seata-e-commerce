@@ -17,26 +17,41 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
-  seata-server:
+  seata-server-1:
     image: apache/seata-server:2.5.0.jdk21
-    container_name: seata-server
+    container_name: seata-server-1
     depends_on:
       - zookeeper
       - mysql
     environment:
       - SEATA_CONFIG_NAME=application.yml
-      - SEATA_IP=127.0.0.1
-      - SEATA_PORT=8091
+      - SEATA_IP=10.7.30.122
     volumes:
       - "./docker/seata/resources/application.yml:/seata-server/resources/application.yml"
       - "./docker/seata/mysql-connector-j-8.0.33.jar:/seata-server/libs/mysql-connector-j-8.0.33.jar"
     ports:
       - "7091:7091"
       - "8091:8091"
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
+  seata-server-2:
+    image: apache/seata-server:2.5.0.jdk21
+    container_name: seata-server-2
+    depends_on:
+      - zookeeper
+      - mysql
+    environment:
+      - SEATA_CONFIG_NAME=application.yml
+      - SEATA_IP=10.7.30.122
+    volumes:
+      - "./docker/seata/resources/application.yml:/seata-server/resources/application.yml"
+      - "./docker/seata/mysql-connector-j-8.0.33.jar:/seata-server/libs/mysql-connector-j-8.0.33.jar"
+    ports:
+      - "7092:7091"
+      - "8092:8091"
+  #    networks: [ seata-net ]
   zookeeper:
     image: zookeeper:3.9
     container_name: zk
@@ -45,7 +60,7 @@ services:
       - "2181:2181"     # expose if your clients run outside Docker
     environment:
       ZOO_4LW_COMMANDS_WHITELIST: "ruok,stat,conf,isro,mntr,srvr"
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
   tempo:
     container_name: tempo
@@ -60,7 +75,7 @@ services:
       - "9411:9411"
       - "4317:4317"
       - "4318:4318"
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
   prometheus:
     container_name: prometheus
@@ -73,7 +88,7 @@ services:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
   grafana:
     container_name: grafana
@@ -88,7 +103,7 @@ services:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     ports:
       - "3000:3000"
-    networks: [ seata-net ]
+#    networks: [ seata-net ]
 
 networks:
   seata-net:
